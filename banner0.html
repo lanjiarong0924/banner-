@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #banner {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 50px auto
+        }
+
+        ol,
+        ul {
+            list-style: none;
+
+            overflow: hidden;
+        }
+
+        ul li {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: all 1s ease-in
+        }
+
+        li.active {
+            opacity: 1;
+        }
+
+        ol{
+            position: absolute;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="banner">
+        <ul>
+            <li>
+                <img src="images/1.jpg" alt="">
+            </li>
+            <li>
+                <img src="images/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="images/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="images/4.jpg" alt="">
+            </li>
+            <li>
+                <img src="images/5.jpg" alt="">
+            </li>
+        </ul>
+
+        <ol>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+
+
+    <script>
+        var ulLi = document.querySelectorAll("ul li")
+        document.querySelectorAll("ol li").forEach(function (el, index) {
+
+            console.log(el, index)
+            el.onclick = function () {
+                for(var i=0;i<ulLi.length; i++){
+                    if(ulLi[i].className == "active"){
+                        ulLi[i].className = ""
+                    }
+                }
+                ulLi[index].classList.add("active")
+            }
+        })
+
+    </script>
+</body>
+
+</html>

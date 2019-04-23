@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carousel Figure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            width: 720px;
+            height: 288px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #index {
+            position: absolute;
+            left: 320px;
+            bottom: 20px;
+
+        }
+
+        #index li {
+            width: 8px;
+            height: 8px;
+            border: solid 1px gray;
+            border-radius: 100%;
+            background-color: #eee;
+            display: inline-block;
+        }
+
+        #img {
+            width: 720px;
+            height: 288px;
+        }
+
+        #img img {
+            width: 100%
+        }
+
+        #img li {
+            width: 720px;
+            height: 288px;
+            position: absolute;
+            /*必须设置为absolute，否则第一个li会把后面的都覆盖*/
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        #index .on {
+            background-color: black;
+        }
+
+        #img .opa-on {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!--淡入淡出-->
+    <nav>
+        <ul id="index">
+            <li class="on"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul id="img">
+            <li class="opa-on">
+                <img src="images/1.jpg" alt="img1">
+            </li>
+            <li>
+                <img src="images/2.jpg" alt="img2">
+            </li>
+            <li>
+                <img src="images/3.jpg" alt="img3">
+            </li>
+            <li>
+                <img src="images/4.jpg" alt="img4">
+            </li>
+            <li>
+                <img src="images/5.jpg" alt="img5">
+            </li>
+        </ul>
+    </nav>
+    <script>
+        var imgList = document.getElementById('img').getElementsByTagName('li');
+        var list = document.getElementById('index').getElementsByTagName('li');
+        var index = 0;
+        var timer;
+        for (var i = 0; i < list.length; i++) {
+            list[i].index = i;
+            list[i].onmouseover = function () {
+                moveImg(imgList, this.index);
+                moveIndex(list, this.index);
+            }
+        }
+        function moveImg(list, index) {
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].className == 'opa-on') {//清除li的透明度样式
+                    list[i].className = '';
+                }
+            }
+            list[index].className = 'opa-on';
+        }
+        function moveIndex(list, num) {//移动小圆圈
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].className == 'on') {//清除li的背景样式
+                    list[i].className = '';
+                }
+            }
+            list[num].className = 'on';
+        }
+    </script>
+</body>
+
+</html>
